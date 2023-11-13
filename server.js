@@ -11,6 +11,8 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 app.get("/hello", (req,res) => {
     res.send(helloJson)
 })
@@ -20,4 +22,15 @@ app.get("/echo/:id", (req,res) => {
     res.send(echoJson)
 })
 
-app.listen(3000, () => console.log("server on"))
+app.post("/sum", (req,res) => {
+    numbers = req.body.numbers;
+    sum = 0;
+
+    numbers.forEach(number => {
+        sum += number
+    });
+
+    res.send({"sum":sum})
+})
+
+app.listen(port, () => console.log("server on"))
